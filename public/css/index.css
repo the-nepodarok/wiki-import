@@ -1,0 +1,205 @@
+html,
+body {
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+html {
+    height: 100vh;
+    background-image: url("/svg/wiki_logo.svg"), url("/svg/wiki_logo.svg");
+    background-repeat: no-repeat;
+    background-position: right top, left bottom;
+    background-size: 25%, 15%;
+    box-shadow: inset 0px 0px 277px 3px aliceblue;
+}
+
+input {
+    padding: 8px;
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 5px;
+    text-transform: capitalize;
+}
+
+p {
+    margin: 0;
+}
+
+hr {
+    border: 1px solid black;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+tr, th {
+    padding: 2px 10px;
+    border: none;
+    font-weight: normal;
+}
+
+.visually_hidden {
+    visibility: hidden;
+}
+
+.list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.button {
+    border-radius: 5px;
+    background-color: salmon;
+    border: none;
+    padding: 10px;
+    font-weight: bold;
+    transition-duration: 0.3s;
+}
+
+.button:hover {
+    filter: hue-rotate(90deg);
+}
+
+.content-wrapper {
+    width: 800px;
+    margin: 0 auto;
+}
+
+.tab-list {
+    display: flex;
+}
+
+.option-text {
+    padding: 2px 5px;
+    position: relative;
+    border-top: 1px solid black;
+    border-collapse: collapse;
+    cursor: pointer;
+}
+
+.option-text::before {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    right: -3px;
+    width: 1px;
+    height: 24px;
+    background-color: black;
+    transform: skewX(15deg);
+}
+
+.option-text::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    left: -3px;
+    width: 1px;
+    height: 24px;
+    background-color: black;
+    transform: skewX(-15deg);
+}
+
+.tab-option {
+    border-bottom: 24px solid transparent;
+	border-left: 7px solid transparent;
+	border-right: 7px solid transparent;
+    height: 0;
+}
+
+.tab-option.active {
+    border-bottom-color: papayawhip;
+}
+
+.tab {
+    display: none;
+    min-height: 400px;
+    padding: 20px;
+    border: 1px solid black;
+}
+
+.tab_active {
+    display: block;
+}
+
+.import-wrapper {
+    padding: 5px 40px 10px;
+    margin-bottom: 30px;
+    border: 1px solid black;
+    text-wrap: none;
+    word-wrap: break-word;
+}
+
+.import-error {
+    font-weight: bold;
+    color: salmon;
+}
+
+.result-text {
+    margin-bottom: 20px;
+}
+
+.results-table {
+    margin-top: 20px;
+}
+
+tr:nth-child(odd) {
+    background-color: #9ca3af;
+}
+
+tr:first-of-type {
+    background-color: cadetblue;
+}
+
+.search-wrapper {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.search-results_wrapper {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.search-query_text {
+    margin-bottom: 10px;
+}
+
+.search-result {
+    cursor: pointer;
+    color: #3e3e3e;
+
+    &:hover {
+        color: #718096;
+    }
+
+    &:active {
+        color: #e2e8f0;
+    }
+}
+
+.results-wrapper {
+    margin-bottom: 20px;
+}
+
+.results-option {
+    margin-bottom: 5px;
+}
+
+.article-frame {
+    width: 350px;
+    height: 400px;
+    padding: 20px;
+    border: 1px solid black;
+    overflow: auto;
+}
+
+.article-text p {
+    margin: 15px 0;
+}
