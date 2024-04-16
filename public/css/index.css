@@ -203,3 +203,7 @@ tr:first-of-type {
 .article-text p {
     margin: 15px 0;
 }
+
+span.word_highlighted {
+    background-color: salmon;
+}

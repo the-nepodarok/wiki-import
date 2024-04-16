@@ -18,7 +18,7 @@
                 <ul class="list results_list">
         @foreach($this->results as $result)
                     <li class="results-option">
-                        <p class="search-result" wire:click="$set('text', `{{ $result->contents }}`)">
+                        <p class="search-result" wire:click="showText(`{{ $result->contents }}`)" onclick="document.querySelector('.article-frame').scroll(0, 0)">
                             <span>{{ $result->header }}</span>
                             <span>({{ $result->pivot->count }} @choice('plurals.entry', $result->pivot->count))</span>
                         </p>
@@ -32,9 +32,9 @@
         </div>
 
         <div class="article-frame">
-            <article class="article-text">
+            <article class="article-text" wire:loading.remove>
             @foreach(explode("\n", $text) as $paragraph)
-                <p>{{ $paragraph }}</p>
+                <p>{!! strip_tags($paragraph, '<span>') !!}</p>
             @endforeach
             </article>
         </div>

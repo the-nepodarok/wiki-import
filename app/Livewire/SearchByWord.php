@@ -16,6 +16,7 @@ class SearchByWord extends Component
 
     public function search(): void
     {
+        // обнулить текст статьи и текст ошибки перед обновлением
         $this->reset('text', 'error');
 
         if ($this->word) {
@@ -27,6 +28,17 @@ class SearchByWord extends Component
         } else {
             $this->error = 'Введите слово для поиска';
         }
+    }
+
+    /**
+     * Отобразить текст статьи с подсвеченными вхождениями посредством оборачивания в span с заданным классом
+     * и применением strip_tags для удаления возможных script-тегов
+     * @param string $text
+     * @return void
+     */
+    public function showText(string $text): void
+    {
+        $this->text = preg_replace("/$this->word\b/u", '<span class="word_highlighted">' . $this->word . '</span>', $text);
     }
 
     /**
