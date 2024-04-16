@@ -9,10 +9,10 @@ use Livewire\Component;
 
 class SearchByWord extends Component
 {
-    public int $matchCount;
-    public string $word = '';
-    public string $text = '';
-    public string $error;
+    public int $matchCount; // всех совпадений
+    public string $word = ''; // искомое слово
+    public string $text = ''; // текст статьи
+    public string $error; // текст ошибки
 
     public function search(): void
     {

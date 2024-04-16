@@ -11,10 +11,10 @@ use Livewire\Component;
 
 class ImportArticle extends Component
 {
-    public string $word = '';
+    public string $word = ''; // текст запроса
     public ?Article $article = null;
-    public float $time;
-    public string $error = '';
+    public float $time; // время выполнения
+    public string $error = ''; // текст ошибки
 
     /**
      * @param WikiImporter $wikiImporter Сервис импорта статей

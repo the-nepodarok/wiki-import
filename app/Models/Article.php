@@ -53,6 +53,11 @@ class Article extends Model
         return $count;
     }
 
+    /**
+     * Вызывает метод подсчёта слов и записывает общее количество слов в таблицу
+     * @return void
+     * @throws \Exception
+     */
     public function countWords(): void
     {
         $this->word_count = $this->splitIntoWords();
