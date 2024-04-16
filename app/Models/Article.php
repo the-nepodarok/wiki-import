@@ -72,6 +72,6 @@ class Article extends Model
      */
     public static function searchByWord(string $word): ?Collection
     {
-        return Word::firstWhere(['word' => $word])?->articles;
+        return Word::firstWhere(['word' => $word])?->articles()->orderByDesc('count')->get();
     }
 }
