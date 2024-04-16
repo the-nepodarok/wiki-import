@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Facades\DB;
 
 class Article extends Model
 {
@@ -20,24 +21,34 @@ class Article extends Model
     public $timestamps = false;
 
     /**
-     * Разбить текст на слова
+     * Разбить текст на слова-атомы с подсчётом вхождений каждого
      * @return int количество слов
+     * @throws \Exception
      */
     private function splitIntoWords(): int
     {
         // Разбивка по пробелам и знакам препинания
         $words = preg_split('/[\s=\/,.()]/', mb_strtolower($this->contents), 0, PREG_SPLIT_NO_EMPTY);
-        $count = count($words);
-        $words = array_unique($words);
+        $count = count($words); // посчитать количество всех слов
+        $words = array_unique($words); // избавиться от повторов слов
+        $bulk = [];
 
         foreach ($words as $word) {
             if (preg_match('/^[A-zА-я0-9]+$/u', $word)) {
-                $word = Word::firstOrCreate(['word' => $word]);
+                $word_id = Word::firstOrCreate(['word' => $word])->id;
 
-                // Получение кол-ва вхождений слова в статье
-                $this->words()->attach($word, ['count' => substr_count(mb_strtolower($this->contents), $word->word)]);
+                $bulk[] = [
+                    'word_id' => $word_id,
+                    // точный подсчёт кол-ва вхождений слова (без окончаний падежей и склонений)
+                    'count' => preg_match_all("/" . mb_strtolower($word) . "\b/u", mb_strtolower($this->contents)),
+                ];
             }
         }
+
+        // пакетная вставка через транзакцию
+        DB::transaction(function() use ($bulk) {
+            $this->words()->attach($bulk);
+        });
 
         return $count;
     }
