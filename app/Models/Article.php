@@ -28,7 +28,7 @@ class Article extends Model
     private function splitIntoWords(): int
     {
         // Разбивка по пробелам и знакам препинания
-        $words = preg_split('/[\s=\/,.()]/', mb_strtolower($this->contents), 0, PREG_SPLIT_NO_EMPTY);
+        $words = preg_split('/[\s=\/,.()\[\]]/', mb_strtolower($this->contents), 0, PREG_SPLIT_NO_EMPTY);
         $count = count($words); // посчитать количество всех слов
         $words = array_unique($words); // избавиться от повторов слов
         $bulk = [];
@@ -40,7 +40,7 @@ class Article extends Model
                 $bulk[] = [
                     'word_id' => $word_id,
                     // точный подсчёт кол-ва вхождений слова (без окончаний падежей и склонений)
-                    'count' => preg_match_all("/" . mb_strtolower($word) . "\b/u", mb_strtolower($this->contents)),
+                    'count' => preg_match_all('/' . mb_strtolower($word) . '\b/u', mb_strtolower($this->contents)),
                 ];
             }
         }
