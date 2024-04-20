@@ -47,7 +47,9 @@ class Article extends Model
 
         // пакетная вставка через транзакцию
         DB::transaction(function() use ($bulk) {
-            $this->words()->attach($bulk);
+            try {
+                $this->words()->attach($bulk);
+            } catch (\PDOException $_) {}
         });
 
         return $count;
